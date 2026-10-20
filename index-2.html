@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7c3aed">
+<title>SRI CREATIONS | Mini Games</title>
+<style>
+:root{--ink:#282044;--purple:#7c3aed;--pink:#ff579a;--yellow:#ffe066;--mint:#6ee7b7}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff2b7,#ffd6e7 48%,#d9d7ff);min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+#intro{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(135deg,#7c3aed,#ec4899 65%,#ffb84d);color:white;transition:opacity .5s}
+#intro.hide{opacity:0;pointer-events:none}
+.intro-box{max-width:600px}
+.intro-logo{font-size:clamp(2.6rem,10vw,5.7rem);font-weight:1000;letter-spacing:-3px;line-height:1;text-shadow:4px 5px 0 #35146c}
+.intro-logo span{color:#ffe66d}.intro-box p{font-size:1.1rem;font-weight:650}
+.enter{border:0;border-radius:999px;background:#ffe66d;color:#35146c;font-weight:900;padding:14px 25px;box-shadow:0 6px 0 #d69c21;margin-top:12px}
+header{padding:24px 16px 22px;text-align:center;background:linear-gradient(120deg,#7c3aed,#ec4899);color:white;border-radius:0 0 30px 30px;box-shadow:0 8px 25px #5b21ac33}
+.logo{font-size:clamp(2rem,8vw,4rem);font-weight:1000;letter-spacing:-2px;text-shadow:3px 4px 0 #35146c}.logo span{color:#ffe66d}
+header p{margin:6px 0 0;font-weight:650}
+.wrap{max-width:1100px;margin:auto;padding:22px 14px 50px}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 20px}
+.pill{background:#fff;border:2px solid #ffffffb8;border-radius:999px;padding:9px 15px;font-weight:800;box-shadow:0 4px 0 #5b21ac22}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:13px}
+.game-card{border:0;border-radius:22px;padding:16px 10px;background:white;box-shadow:0 7px 0 #5b21ac20,0 12px 25px #5b21ac0c;color:var(--ink);text-align:center;transition:.15s;min-height:150px}
+.game-card:hover{transform:translateY(-4px) rotate(-1deg)}
+.emoji{font-size:42px;display:block}.game-card strong{display:block;font-size:1rem;margin:5px 0}.game-card small{color:#77718d}
+.panel{display:none;background:#fff;border-radius:25px;padding:18px;margin-top:20px;box-shadow:0 9px 0 #5b21ac20}
+.panel.active{display:block}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:2px dashed #eee;padding-bottom:12px}
+.panel h2{margin:0}.btn{border:0;background:#7c3aed;color:#fff;border-radius:12px;padding:10px 14px;font-weight:800}.btn.alt{background:#ffe066;color:#38265f}.btn.pink{background:#ff579a}
+.playarea{padding:18px 2px 2px;text-align:center;min-height:190px}
+.big{font-size:clamp(2rem,9vw,4rem);font-weight:950;margin:10px}.muted{color:#716b84}
+.row{display:flex;justify-content:center;align-items:center;gap:9px;flex-wrap:wrap;margin:12px 0}
+input[type=number],input[type=text]{border:2px solid #e5ddf8;border-radius:12px;padding:11px;width:min(220px,100%);background:#fff}
+.message{font-weight:800;min-height:28px;margin:12px}
+.choice{font-size:2.1rem;min-width:70px;min-height:65px;border:2px solid #e8defc;border-radius:16px;background:#faf7ff}
+.board{display:grid;gap:7px;justify-content:center;margin:15px auto}
+.ttt{grid-template-columns:repeat(3,80px)}.ttt button{height:80px;font-size:2rem;font-weight:900;border:0;border-radius:14px;background:#f0eaff;color:#7c3aed}
+.memory{grid-template-columns:repeat(4,minmax(52px,70px))}.memory button{height:65px;font-size:1.8rem;border:0;border-radius:13px;background:#f0eaff}
+canvas{max-width:100%;border:3px solid #eadfff;border-radius:16px;background:#fdfbff;touch-action:manipulation}
+.tap-target{width:130px;height:130px;border:0;border-radius:50%;background:#ff579a;color:white;font-size:2rem;font-weight:900;box-shadow:0 7px 0 #ce3475}
+.mole-grid{display:grid;grid-template-columns:repeat(3,75px);gap:8px;justify-content:center}.mole-grid button{height:65px;border:0;border-radius:15px;background:#e7dcff;font-size:1.8rem}
+footer{text-align:center;padding:0 15px 25px;color:#655b7c;font-weight:650}
+@media(max-width:420px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ttt{grid-template-columns:repeat(3,70px)}.ttt button{height:70px}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<div id="intro">
+  <div class="intro-box">
+    <div class="intro-logo">SRI <span>CREATIONS</span></div>
+    <p>✨ Welcome to your colorful mini-games world! ✨</p>
+    <button class="enter" onclick="enterSite()">LET'S PLAY 🎮</button>
+  </div>
+</div>
+<header>
+  <div class="logo">SRI <span>CREATIONS</span></div>
+  <p>🎮 SRI MINI GAMES · Play • Score • Have Fun!</p>
+</header>
+<main class="wrap">
+  <div class="stats">
+    <div class="pill">🏆 Total score: <span id="totalScore">0</span></div>
+    <div class="pill">🎯 Games: 10</div>
+    <div class="pill">📱 Mobile friendly</div>
+  </div>
+  <section class="grid" id="gameGrid">
+    <button class="game-card" onclick="openGame('clicker')"><span class="emoji">⚡</span><strong>Click Rush</strong><small>Tap as fast as you can</small></button>
+    <button class="game-card" onclick="openGame('guess')"><span class="emoji">🔢</span><strong>Guess Number</strong><small>Find the secret number</small></button>
+    <button class="game-card" onclick="openGame('rps')"><span class="emoji">✊</span><strong>Rock Paper Scissors</strong><small>Beat the computer</small></button>
+    <button class="game-card" onclick="openGame('ttt')"><span class="emoji">⭕</span><strong>Tic-Tac-Toe</strong><small>Play against the computer</small></button>
+    <button class="game-card" onclick="openGame('memory')"><span class="emoji">🧠</span><strong>Memory Match</strong><small>Match all the pairs</small></button>
+    <button class="game-card" onclick="openGame('snake')"><span class="emoji">🐍</span><strong>Snake</strong><small>Eat dots, don't crash</small></button>
+    <button class="game-card" onclick="openGame('reaction')"><span class="emoji">🚦</span><strong>Reaction Test</strong><small>Tap when it turns green</small></button>
+    <button class="game-card" onclick="openGame('math')"><span class="emoji">➕</span><strong>Math Sprint</strong><small>Solve quick sums</small></button>
+    <button class="game-card" onclick="openGame('mole')"><span class="emoji">🐹</span><strong>Whack-a-Mole</strong><small>Catch the pop-up mole</small></button>
+    <button class="game-card" onclick="openGame('catch')"><span class="emoji">⭐</span><strong>Catch the Star</strong><small>Catch stars with your basket</small></button>
+  </section>
+  <section class="panel" id="panel">
+    <div class="panel-head"><h2 id="gameTitle">Game</h2><button class="btn alt" onclick="closeGame()">← All games</button></div>
+    <div class="playarea" id="playarea"></div>
+  </section>
+</main>
+<footer>Made with 💜 by SRI CREATIONS · Free mini games for everyone</footer>
+<script>
+let totalScore=0, activeCleanup=[];
+function cleanup(){activeCleanup.forEach(fn=>{try{fn()}catch(e){}});activeCleanup=[]}
+function on(el,ev,fn){el.addEventListener(ev,fn);activeCleanup.push(()=>el.removeEventListener(ev,fn))}
+function score(n){totalScore+=n;document.getElementById('totalScore').textContent=totalScore}
+function enterSite(){document.getElementById('intro').classList.add('hide')}
+function closeGame(){cleanup();document.getElementById('panel').classList.remove('active');document.getElementById('gameGrid').style.display='grid'}
+function openGame(name){cleanup();document.getElementById('gameGrid').style.display='none';document.getElementById('panel').classList.add('active');document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});let area=document.getElementById('playarea');area.innerHTML='';let titles={clicker:'⚡ Click Rush',guess:'🔢 Guess Number',rps:'✊ Rock Paper Scissors',ttt:'⭕ Tic-Tac-Toe',memory:'🧠 Memory Match',snake:'🐍 Snake',reaction:'🚦 Reaction Test',math:'➕ Math Sprint',mole:'🐹 Whack-a-Mole',catch:'⭐ Catch the Star'};document.getElementById('gameTitle').textContent=titles[name];games[name](area)}
+const games={
+clicker(a){a.innerHTML='<p>Tap the button as many times as possible in 10 seconds!</p><div class="big" id="count">0</div><button class="btn pink" id="tap">TAP! ⚡</button><div class="message" id="msg">Press Start when ready.</div><button class="btn" id="start">Start 10 seconds</button>';let count=0,live=false,timer;on(a.querySelector('#start'),'click',()=>{count=0;live=true;a.querySelector('#count').textContent='0';a.querySelector('#msg').textContent='GO GO GO!';a.querySelector('#start').disabled=true;timer=setTimeout(()=>{live=false;a.querySelector('#msg').textContent='Time! You scored '+count+' points.';score(count);a.querySelector('#start').disabled=false},10000);activeCleanup.push(()=>clearTimeout(timer))});on(a.querySelector('#tap'),'click',()=>{if(live){count++;a.querySelector('#count').textContent=count}})},
+guess(a){let secret=Math.floor(Math.random()*100)+1,tries=0;a.innerHTML='<p>I'm thinking of a number from 1 to 100.</p><div class="row"><input id="num" type="number" min="1" max="100" placeholder="Your guess"><button class="btn" id="guessBtn">Guess</button></div><div class="message" id="msg">You have 7 tries. Good luck!</div><button class="btn alt" id="reset">New number</button>';let left=7;function reset(){secret=Math.floor(Math.random()*100)+1;tries=0;left=7;a.querySelector('#msg').textContent='You have 7 tries. Good luck!';a.querySelector('#num').value=''}on(a.querySelector('#reset'),'click',reset);on(a.querySelector('#guessBtn'),'click',()=>{let v=Number(a.querySelector('#num').value);if(!v||v<1||v>100){a.querySelector('#msg').textContent='Enter a number from 1 to 100.';return}tries++;left--;if(v===secret){a.querySelector('#msg').textContent='🎉 Correct! +'+Math.max(5,left*3)+' points';score(Math.max(5,left*3));reset()}else if(left===0){a.querySelector('#msg').textContent='Out of tries! The number was '+secret+'.';}else a.querySelector('#msg').textContent=(v<secret?'Too low! ⬆️':'Too high! ⬇️')+' '+left+' tries left.'})},
+rps(a){a.innerHTML='<p>Choose your move!</p><div class="row"><button class="choice" data-v="rock">✊</button><button class="choice" data-v="paper">✋</button><button class="choice" data-v="scissors">✌️</button></div><div class="message" id="msg">First to win a round gets 5 points.</div>';a.querySelectorAll('[data-v]').forEach(b=>on(b,'click',()=>{let you=b.dataset.v,opts=['rock','paper','scissors'],cpu=opts[Math.floor(Math.random()*3)],emoji={rock:'✊',paper:'✋',scissors:'✌️'},res=you===cpu?'Draw!':((you==='rock'&&cpu==='scissors')||(you==='paper'&&cpu==='rock')||(you==='scissors'&&cpu==='paper'))?'You win! +5':'Computer wins!';if(res.startsWith('You win'))score(5);a.querySelector('#msg').textContent='You '+emoji[you]+' · Computer '+emoji[cpu]+' — '+res}))},
+ttt(a){a.innerHTML='<p>You're X. Computer is O.</p><div class="board ttt" id="board"></div><div class="message" id="msg">Your turn!</div><button class="btn" id="reset">Play again</button>';let board=Array(9).fill(''),done=false;const b=a.querySelector('#board');function draw(){b.innerHTML='';board.forEach((v,i)=>{let x=document.createElement('button');x.textContent=v;on(x,'click',()=>move(i));b.appendChild(x)})}function winner(p){return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(line=>line.every(i=>board[i]===p))}function finish(){if(winner('X')){done=true;score(10);a.querySelector('#msg').textContent='🎉 You win! +10 points';return true}if(winner('O')){done=true;a.querySelector('#msg').textContent='Computer wins. Try again!';return true}if(board.every(Boolean)){done=true;a.querySelector('#msg').textContent="It's a draw!";return true}return false}function move(i){if(done||board[i])return;board[i]='X';draw();if(finish())return;let empty=board.map((v,j)=>v?null:j).filter(v=>v!==null);if(empty.length){let j=empty[Math.floor(Math.random()*empty.length)];board[j]='O';draw();finish()}}function reset(){board=Array(9).fill('');done=false;a.querySelector('#msg').textContent='Your turn!';draw()}on(a.querySelector('#reset'),'click',reset);draw()},
+memory(a){let vals=['🍓','🍋','🍉','🍇','🍒','🍍','🥝','🍊'];let deck=[...vals,...vals].sort(()=>Math.random()-.5),open=[],matched=0,moves=0;a.innerHTML='<p>Find all 8 matching pairs.</p><div class="muted">Moves: <b id="moves">0</b></div><div class="board memory" id="mem"></div><div class="message" id="msg">Tap two cards.</div><button class="btn alt" id="reset">Shuffle cards</button>';let board=a.querySelector('#mem');function draw(){board.innerHTML='';deck.forEach((v,i)=>{let b=document.createElement('button');b.textContent=(matchedCards.has(i)||open.includes(i))?v:'❔';on(b,'click',()=>flip(i));board.appendChild(b)})}let matchedCards=new Set(),lock=false;function flip(i){if(lock||matchedCards.has(i)||open.includes(i))return;open.push(i);draw();if(open.length===2){moves++;a.querySelector('#moves').textContent=moves;if(deck[open[0]]===deck[open[1]]){open.forEach(i=>matchedCards.add(i));open=[];if(matchedCards.size===16){score(Math.max(10,50-moves));a.querySelector('#msg').textContent='Amazing! All pairs matched! +'+Math.max(10,50-moves)}else a.querySelector('#msg').textContent='Match! Keep going.';draw()}else{lock=true;let old=[...open];let t=setTimeout(()=>{open=[];lock=false;draw()},700);activeCleanup.push(()=>clearTimeout(t))}}}function reset(){deck=[...vals,...vals].sort(()=>Math.random()-.5);open=[];matched=0;moves=0;matchedCards=new Set();lock=false;a.querySelector('#moves').textContent='0';a.querySelector('#msg').textContent='Tap two cards.';draw()}on(a.querySelector('#reset'),'click',reset);draw()},
+snake(a){a.innerHTML='<p>Use arrow keys or the buttons. Eat the red dot!</p><canvas id="snakeCanvas" width="300" height="300"></canvas><div class="row"><button class="btn" data-dir="up">⬆️</button></div><div class="row"><button class="btn" data-dir="left">⬅️</button><button class="btn" data-dir="down">⬇️</button><button class="btn" data-dir="right">➡️</button></div><div class="message" id="msg">Score: 0</div><button class="btn alt" id="reset">Restart</button>';let c=a.querySelector('canvas'),ctx=c.getContext('2d'),snake,dir,food,pts,timer,dead;function place(){food={x:Math.floor(Math.random()*15),y:Math.floor(Math.random()*15)}}function init(){snake=[{x:7,y:7},{x:6,y:7},{x:5,y:7}];dir={x:1,y:0};pts=0;dead=false;place();a.querySelector('#msg').textContent='Score: 0';clearInterval(timer);timer=setInterval(tick,140);draw()}function change(d){let map={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}},n=map[d];if(n.x!==-dir.x||n.y!==-dir.y)dir=n}function draw(){ctx.fillStyle='#fdfbff';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff579a';ctx.fillRect(food.x*20+3,food.y*20+3,14,14);snake.forEach((p,i)=>{ctx.fillStyle=i?'#8b5cf6':'#22c55e';ctx.fillRect(p.x*20+2,p.y*20+2,16,16)})}function tick(){if(dead)return;let h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(h.x<0||h.x>14||h.y<0||h.y>14||snake.some(p=>p.x===h.x&&p.y===h.y)){dead=true;clearInterval(timer);a.querySelector('#msg').textContent='Game over! Score '+pts+'. Press Restart.';score(pts);return}snake.unshift(h);if(h.x===food.x&&h.y===food.y){pts+=1;a.querySelector('#msg').textContent='Score: '+pts;place()}else snake.pop();draw()}a.querySelectorAll('[data-dir]').forEach(b=>on(b,'click',()=>change(b.dataset.dir)));let key=e=>{let m={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'};if(m[e.key]){e.preventDefault();change(m[e.key])}};window.addEventListener('keydown',key);activeCleanup.push(()=>{window.removeEventListener('keydown',key);clearInterval(timer)});on(a.querySelector('#reset'),'click',init);init()},
+reaction(a){a.innerHTML='<p>Wait for green, then tap as fast as possible.</p><button class="tap-target" id="target">START</button><div class="message" id="msg">Don't tap too early!</div>';let state='ready',start=0,timer;let b=a.querySelector('#target');on(b,'click',()=>{if(state==='ready'){state='wait';b.style.background='#f59e0b';b.textContent='WAIT';a.querySelector('#msg').textContent='Wait for green...';timer=setTimeout(()=>{state='go';start=performance.now();b.style.background='#22c55e';b.textContent='TAP!'},1000+Math.random()*3000);activeCleanup.push(()=>clearTimeout(timer))}else if(state==='wait'){clearTimeout(timer);state='ready';b.style.background='#ff579a';b.textContent='START';a.querySelector('#msg').textContent='Too soon! Try again.'}else{let ms=Math.round(performance.now()-start);state='ready';b.style.background='#ff579a';b.textContent='START';a.querySelector('#msg').textContent='Reaction time: '+ms+' ms'+(ms<250?' — lightning fast!':'');if(ms<500)score(Math.max(1,Math.round((500-ms)/25)))}})},
+math(a){let q=0,correct=0,left=30,timer,answer=0;a.innerHTML='<p>Answer as many as you can in 30 seconds.</p><div class="big" id="question">Press Start</div><div class="row"><input type="number" id="answer" placeholder="Answer"><button class="btn" id="submit">Submit</button></div><div class="message" id="msg">Score: 0 · Time: 30s</div><button class="btn alt" id="start">Start sprint</button>';function newQ(){let x=Math.floor(Math.random()*12)+1,y=Math.floor(Math.random()*12)+1,op=Math.random()<.5?'+':'−';answer=op==='+'?x+y:x-y;a.querySelector('#question').textContent=x+' '+op+' '+y+' = ?';a.querySelector('#answer').value=''}function submit(){if(!timer||left<=0)return;if(Number(a.querySelector('#answer').value)===answer){correct++;score(1);a.querySelector('#msg').textContent='Correct! Score: '+correct+' · Time: '+left+'s'}else a.querySelector('#msg').textContent='Not quite! Score: '+correct+' · Time: '+left+'s';newQ()}on(a.querySelector('#submit'),'click',submit);on(a.querySelector('#answer'),'keydown',e=>{if(e.key==='Enter')submit()});on(a.querySelector('#start'),'click',()=>{clearInterval(timer);correct=0;left=30;newQ();a.querySelector('#msg').textContent='Score: 0 · Time: 30s';timer=setInterval(()=>{left--;a.querySelector('#msg').textContent='Score: '+correct+' · Time: '+left+'s';if(left<=0){clearInterval(timer);timer=null;a.querySelector('#question').textContent='Time up! 🎉';a.querySelector('#msg').textContent='You answered '+correct+' correctly.'}},1000);activeCleanup.push(()=>clearInterval(timer))})},
+mole(a){a.innerHTML='<p>Tap the mole as many times as you can in 15 seconds.</p><div class="big" id="score">0</div><div class="mole-grid" id="moles"></div><div class="message" id="msg">Press Start!</div><button class="btn" id="start">Start 15 seconds</button>';let pts=0,active=-1,live=false,timer,clock;let grid=a.querySelector('#moles');function draw(){grid.innerHTML='';for(let i=0;i<9;i++){let b=document.createElement('button');b.textContent=i===active?'🐹':'🟣';on(b,'click',()=>{if(live&&i===active){pts++;a.querySelector('#score').textContent=pts;active=Math.floor(Math.random()*9);draw()}});grid.appendChild(b)}}on(a.querySelector('#start'),'click',()=>{clearInterval(timer);clearTimeout(clock);pts=0;live=true;active=Math.floor(Math.random()*9);a.querySelector('#score').textContent='0';a.querySelector('#msg').textContent='Go!';a.querySelector('#start').disabled=true;draw();timer=setInterval(()=>{active=Math.floor(Math.random()*9);draw()},650);clock=setTimeout(()=>{live=false;clearInterval(timer);a.querySelector('#msg').textContent='Time! You scored '+pts+'.';score(pts);a.querySelector('#start').disabled=false},15000);activeCleanup.push(()=>{clearInterval(timer);clearTimeout(clock)})});draw()},
+catch(a){a.innerHTML='<p>Move the basket with the buttons or arrow keys to catch falling stars.</p><canvas id="catchCanvas" width="320" height="300"></canvas><div class="row"><button class="btn" id="left">⬅️ Left</button><button class="btn" id="right">Right ➡️</button></div><div class="message" id="msg">Stars: 0</div><button class="btn alt" id="start">Start / Restart</button>';let c=a.querySelector('canvas'),ctx=c.getContext('2d'),basket,stars,pts,live,raf,last;function init(){basket=140;stars=[];pts=0;live=true;last=0;a.querySelector('#msg').textContent='Stars: 0';cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}function move(d){basket=Math.max(0,Math.min(270,basket+d))}on(a.querySelector('#left'),'click',()=>move(-25));on(a.querySelector('#right'),'click',()=>move(25));let key=e=>{if(e.key==='ArrowLeft')move(-20);if(e.key==='ArrowRight')move(20)};window.addEventListener('keydown',key);activeCleanup.push(()=>{window.removeEventListener('keydown',key);cancelAnimationFrame(raf)});function loop(t){if(!live)return;if(t-last>600){stars.push({x:Math.random()*300,y:-10});last=t}ctx.clearRect(0,0,320,300);ctx.font='22px sans-serif';stars.forEach(s=>{s.y+=2.2;ctx.fillText('⭐',s.x,s.y)});ctx.fillText('🧺',basket,285);stars=stars.filter(s=>{if(s.y>265&&s.x>basket-5&&s.x<basket+35){pts++;a.querySelector('#msg').textContent='Stars: '+pts;return false}return s.y<315});raf=requestAnimationFrame(loop)}on(a.querySelector('#start'),'click',init);init()}
+};
+</script>
+</body>
+</html>
